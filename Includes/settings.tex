@@ -1,0 +1,88 @@
+\usepackage{cnf}
+%%2. Brief communications, Comments, Replies articles
+%\usepackage[compact]{cnf}
+
+%\usepackage{framed,multirow}
+
+%% The amssymb package provides various useful mathematical symbols
+\usepackage{amssymb, amsmath}
+\usepackage{latexsym}
+
+% Following three lines are needed for this document.
+% If you are not loading colors or url, then these are
+% not required.
+\usepackage{url}
+\usepackage{xcolor}
+\definecolor{newcolor}{rgb}{.8,.349,.1}
+
+\usepackage[hidelinks]{hyperref}
+
+\usepackage[switch,pagewise]{lineno} %Required by command \linenumbers below
+
+\journal{Manuscript in Preparation}
+
+
+%---------------------------------------------------------------
+% Additional Settings
+%---------------------------------------------------------------
+\usepackage[numbers]{natbib}
+\usepackage{tikz, graphicx}
+\usepackage{setspace}
+\usepackage{float}
+\usepackage{graphicx,caption,subcaption}
+\usepackage{soul}
+\usepackage{lipsum}
+
+
+\usepackage[version=4]{mhchem}
+\makeatletter
+\newcounter{reaction}
+%%% >> for article <<
+\renewcommand\thereaction{R\,\arabic{reaction}}
+%%% << for article <<
+%%% >> for report and book >>
+%\renewcommand\thereaction{R\,\thechapter.\arabic{reaction}}
+%\@addtoreset{reaction}{chapter}
+%%% << for report and book <<
+\newcommand\reactiontag%
+{\refstepcounter{reaction}\tag{\thereaction}}
+\newcommand\reaction@[2][]%
+{\begin{equation}\ce{#2}%
+		\ifx\@empty#1\@empty\else\label{#1}\fi%
+		\reactiontag\end{equation}}
+\newcommand\reaction@nonumber[1]%
+{\begin{equation*}\ce{#1}\end{equation*}}
+\newcommand\reaction%
+{\@ifstar{\reaction@nonumber}{\reaction@}}
+\makeatother
+
+\makeatletter
+\renewcommand*{\@fnsymbol}[1]{\ensuremath{\ifcase#1\or 1 \or* \or 3  \or  4 \else\@ctrerr\fi}}
+\makeatother
+
+
+% Define a command to reset counters and add 'S' prefix for Supplementary section
+\newcommand{\beginsupplement}{%
+	% Figures
+	\setcounter{figure}{0}%
+	\renewcommand{\thefigure}{S\arabic{figure}}%
+	% Tables
+	\setcounter{table}{0}%
+	\renewcommand{\thetable}{S\arabic{table}}%
+	% Equations
+	\setcounter{equation}{0}%
+	\renewcommand{\theequation}{S\arabic{equation}}%
+	% Sections
+	\setcounter{section}{0}%
+	\renewcommand{\thesection}{S\arabic{section}}%
+	% Pages
+	\setcounter{page}{1}%
+	%\renewcommand{\thepage}{S.\arabic{page}}%
+	%\renewcommand{\thepage}{S.\arabic{page}}
+	% Hyperref compatibility
+	\renewcommand{\theHfigure}{S\arabic{figure}}%
+	\renewcommand{\theHtable}{S\arabic{table}}%
+	\renewcommand{\theHequation}{S\arabic{equation}}%
+	\renewcommand{\theHsection}{S\arabic{section}}%
+	%\renewcommand{\theHpage}{S.\arabic{page}}%
+}

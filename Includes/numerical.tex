@@ -1,0 +1,36 @@
+\section{Numerical model}
+
+The 0-D imposed-pressure reactor (IPR) model of Omnisoot~\citep{adib2025omnisoot} was used to simulate CB formation coupled with chemical kinetics during pyrolysis process in post-reflected-shock conditions in the shock tube. IPR incorporates a sectional population balance model (SPBM) to describe the evolving size distribution of CB agglomerates by tracking the number of agglomerates, $N_{agg}$ and primary particles, $N_{pri}$, and hydrogen content $H_{tot}$. 
+
+The transport equations of mass, species, and CB properties in IPR are the same as those in the constant pressure reactor detailed in~\citep{adib2025omnisoot}, but the energy equation includes an additional term, $\mathrm{d}P/\mathrm{d}t$, to account for the effect of variable pressure on the gas temperature, T, as:
+
+\begin{equation}
+    \begin{split}
+        \frac{\mathrm{d} T}{\mathrm{d} t}=
+        \frac{1}{\rho c_p+\rho_{s}f_v c_{s}}
+        \left[
+        -\sum_k h_k
+        \left(
+        \dot{\omega}_k+\dot{s}_k
+        \right) W_k \right. \\
+        \left.
+        +h_{s}\sum_k \dot{s}_k W_k
+        +\frac{\mathrm{d}P}{\mathrm{d}t}
+        \right],
+        \label{eqn:energypressure}
+    \end{split}
+\end{equation}
+
+\noindent where $\dot{\omega}_k$ is the rate of production of the $k^{\mathrm{th}}$ species, and $\dot{s}_k$ is the rate of its consumption due to CB formation. The CB density, $\rho_{s}$, is assumed constant at 1800~$\mathrm{kg/m^3}$. The specific heat ($c_{s}$) and enthalpy ($h_{s}$) of CB are approximated by those of pure graphite~\cite{mcbride1993coefficients}. The measured pressure trace was filtered to reduce noise and fluctuations, and then imposed on the model. As shown in Fig.~\ref{fig:pressureprofiles}, the measured pressure remains within 10\% of the initial value until 2~ms for all six tests. A significant jump occurs after that increasing the pressure to its peak, which is followed by a drastic drop. The role of variable pressure in capturing the changes in chemistry and CB volume fraction and morphology is discussed in Section~\hl{[TBD]}.
+
+Soot precursors considered in this study include naphthalene (A2), phenanthrene (A3), pyrene (A4), acenaphthylene (A2R5), acephenanthrylene (A3R5), and cyclopentapyrene (A4R5) due to extensive support in the literature for their role in initial steps of CB formation~\citep{mercier2019dimers, martin2019reactivity}. The E-Bridge Modified model is used to describe the dimerization and adsorption of precursors that contribute to CB inception and surface growth, respectively. The general formulation of the model is based on the inception model proposed by Frenklach and Mebel~\citep{frenklach2020mechanism} with some modifications detailed in~\citep{adib2025omnisoot}. Two scaling factors, $\eta_{inc}$ and $\eta_{ads}$, between 0 and 1 are used to adjust the inception and PAH adsorption rates, respectively~\citep{adib2025omnisoot}.
+
+The surface growth is described by H-abstraction-$\mathrm{C_2H_2}$/Carbon-addition (HACA) scheme~\citep{appel2000kinetic}, but the surface density of hydrogenated sites, $\chi_{soot{\text-}H}$ is dynamically calculated as the ratio of hydrogen content to the surface area of agglomerates, i.e., $\chi_{soot{\text-}H}=H_{tot}/A_{tot}$~\citep{blanquart2009analyzing}. An Arrhenius equation is used to account for the loss of hydrogen by the carbonization of CB particles as~\citep{basile2002coagulation}:
+
+\begin{equation}
+	\left(\frac{\mathrm{d}H_{tot}}{\mathrm{d}t}\right)_{\mathrm{carb}}=
+	-A_{carb}\cdot \mathrm{exp}(\frac{-E_{carb}}{RT}),
+	\label{eqn:kads_ebir}
+\end{equation}
+
+\noindent where $A_{carb}$ and $E_{carb}$ are the exponential prefactor and activation energy for carbonization, respectively.

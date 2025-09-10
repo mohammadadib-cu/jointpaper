@@ -1,0 +1,29 @@
+\documentclass[times,twocolumn,final]{elsarticle}
+\include{Includes/settings}
+
+\begin{document}
+
+% Submission material
+% \include{Includes/coverletter}
+% \include{Includes/submissionguide}
+% \include{Includes/highlights}
+% ------------------------------------------------------------ %
+% Title material
+\input{Includes/title}
+% ------------------------------------------------------------ %
+\input{Includes/introduction}
+\input{Includes/experimental}
+\input{Includes/numerical}
+\input{Includes/results/results}
+\input{Includes/conclusion}
+\input{Includes/acknowledgements}
+% ------------------------------------------------------------ %
+\bibliographystyle{cnf-num}
+\bibliography{
+    Includes/Bibliography/all.bib,
+ }
+\clearpage
+%Supplementary material
+\input{Includes/supplementary}
+
+\end{document}
